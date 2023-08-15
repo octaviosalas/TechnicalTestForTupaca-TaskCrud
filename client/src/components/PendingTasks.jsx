@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import { UserContext } from '../../store/userContext'
+import { useNavigate } from 'react-router-dom'
 
 const PendingTasks = () => { 
 
@@ -16,6 +17,7 @@ const PendingTasks = () => {
     const [showDoneMsg, setShowDoneMsg] = useState(false)
     const [noTasks, setNoTasks] = useState(true)
     const userCtx = useContext(UserContext)
+    const navigate = useNavigate()
 
     useEffect(() => { 
         axios.get(`http://localhost:4000/getTasks/${userCtx.userId}`)
@@ -67,6 +69,9 @@ const PendingTasks = () => {
               console.log(res.data)
               setInProcessMsg(res.data.message)
               setShowInProcessMsg(true)
+              setTimeout(() => { 
+                 navigate("/inProcess")
+              }, 1000)
              })
              .catch(err => console.log(err))
    }
@@ -75,8 +80,10 @@ const PendingTasks = () => {
   return (
     <div>
         <NavBar/>
+         
         {noTasks ? 
-          <div className='grid grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 gap-6 '>
+             <h1 className='font-bold'>Pending Tasks </h1>
             {userPendingTasks.map((t) => ( 
                 <div className="card card-compact w-96 bg-base-100 shadow-xl mt-6">
                 <div className="card-body">

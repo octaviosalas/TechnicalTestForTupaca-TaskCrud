@@ -50,8 +50,12 @@ const CompletedTasks = () => {
   return (
     <div>
         <NavBar/>
+       
         {noTasks ? 
-          <div className='grid grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 gap-6 '>
+              <div>
+                <h1 className='font-bold'>Tasks Completed</h1>
+             </div>
             {userCompletedTasks.map((t) => ( 
                 <div className="card card-compact w-96 bg-base-100 shadow-xl mt-6">
                 <div className="card-body">

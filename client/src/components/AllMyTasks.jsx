@@ -38,6 +38,9 @@ const AllMyTasks = () => {
   return (
     <div>
         <NavBar/>
+        <div>
+           <h1 className='font-bold'>All Tasks</h1>
+        </div>
         <StructureAllMyTasks tasks={allTasks}/>
     </div>
   )
