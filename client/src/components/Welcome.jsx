@@ -7,9 +7,11 @@ import axios from 'axios'
 
 const Welcome = () => {
 
-    const {userId} = useParams()
-    const [userName, setUserName] = useState("")
+
     const userCtx = useContext(UserContext)
+    const userId = userCtx.userId
+    const [userName, setUserName] = useState("")
+
 
     useEffect(() => {
         setTimeout(() => { 
@@ -24,11 +26,11 @@ const Welcome = () => {
                 console.log(err)
             })
         }, 1000) 
-    }, [])
+    }, [userCtx.userId])
 
     useEffect(() => { 
         console.log(userId)
-    }, [])
+    }, [userCtx.userId])
 
   return (
     <div>

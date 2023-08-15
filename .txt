@@ -1,10 +1,10 @@
 Funcionalidades Requeridas
-• Los usuarios deben poder crear tareas con un nombre y una descripción.
+• Los usuarios deben poder crear tareas con un nombre y una descripción. ✔
 • Los usuarios deben poder editar el nombre y la descripción de las tareas.
-• Los usuarios deben poder ver una lista de todas las tareas existentes.
-• Los usuarios deben poder mover las tareas entre tres estados fijos: "Por hacer", "En progreso" y "Hecho".
-• Los usuarios deben poder eliminar tareas.
-• Los usuarios deben poder filtrar tareas por nombre y/o estado.
+• Los usuarios deben poder ver una lista de todas las tareas existentes. ✔
+• Los usuarios deben poder mover las tareas entre tres estados fijos: "Por hacer", "En progreso" y "Hecho". ✔
+• Los usuarios deben poder eliminar tareas. ✔
+• Los usuarios deben poder filtrar tareas por nombre y/o estado. ✔
 • Los usuarios deben poder ordenar las tareas por nombre y/o fecha de creación.
 Requerimientos Técnicos
 1. Crea un servidor con Node.js y Express.js que mantenga las tareas en memoria. Deberá tener endpoints

@@ -18,14 +18,14 @@ const Login = () => {
            email,
            password
       })
+      
       axios.post("http://localhost:4000/login", userData)
            .then((res) => { 
             console.log(res.data)
             userCtx.updateUser(res.data.id)
-            //userCtx.updateUserName(res.data.name)
             setTimeout(() => { 
             navigate(`/welcome/${userCtx.userId}`)
-            }, 1000)
+            }, 3500)
            })
            .catch((err) => { 
             console.log(err)

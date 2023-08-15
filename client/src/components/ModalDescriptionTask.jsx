@@ -16,7 +16,7 @@ const style = {
   px: 4,
   pb: 3,
 };
-const ModalBtn = ({description, date}) => {
+const ModalDescriptionTask = ({description, date}) => {
   
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -45,5 +45,5 @@ const ModalBtn = ({description, date}) => {
         
     )};
 
-export default ModalBtn
+export default ModalDescriptionTask
 

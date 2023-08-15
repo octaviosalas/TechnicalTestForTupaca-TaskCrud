@@ -10,6 +10,10 @@ const PendingTasks = () => {
     const [userPendingTasks, setUserPendingTasks] = useState([])
     const [deleteMessage, setDeleteMessage] = useState("")
     const [showDeleteMessage, setShowDeleteMessage] = useState("")
+    const [inProcessMsg, setInProcessMsg] = useState("")
+    const [showInProcessMsg, setShowInProcessMsg] = useState(false)
+    const [doneMsg, setDoneMsg] = useState("")
+    const [showDoneMsg, setShowDoneMsg] = useState(false)
     const [noTasks, setNoTasks] = useState(true)
     const userCtx = useContext(UserContext)
 
@@ -17,14 +21,16 @@ const PendingTasks = () => {
         axios.get(`http://localhost:4000/getTasks/${userCtx.userId}`)
              .then((res) => { 
                 console.log(res.data)
-                if(res.data.length !== 0) { 
                     const docs = res.data
-                    const onlyPendingTasks = docs.filter(tasks => tasks.pending === true)
-                    setUserPendingTasks(onlyPendingTasks)
-                    console.log(onlyPendingTasks)
-                } else { 
-                  setNoTasks(false)
-                }
+                    const onlyPendingTasks = docs.filter(tasks => tasks.pending === true && tasks.inProgres === false && tasks.done === false)
+                    if(onlyPendingTasks.length !== 0) { 
+                      setUserPendingTasks(onlyPendingTasks)
+                      console.log(onlyPendingTasks)
+                    } else { 
+                      setNoTasks(false)
+                    }
+                    
+             
             
              })
              .catch((err) => { 
@@ -45,6 +51,26 @@ const PendingTasks = () => {
              .catch(err => console.log(err))
    }
 
+       const updateToDone = (idtask) => { 
+            axios.put("http://localhost:4000/updateTaskToDone", {idtask: idtask})
+                 .then(res => { 
+                  console.log(res.data)
+                  setDoneMsg(res.data.message)
+                  setShowDoneMsg(true)
+                 })
+                 .catch(err => console.log(err))
+       }
+
+       const updateToInProcess = (idtask) => { 
+        axios.put("http://localhost:4000/updateTaskToInProcess", {idtask: idtask})
+             .then(res => {
+              console.log(res.data)
+              setInProcessMsg(res.data.message)
+              setShowInProcessMsg(true)
+             })
+             .catch(err => console.log(err))
+   }
+
 
   return (
     <div>
@@ -59,17 +85,19 @@ const PendingTasks = () => {
                     </div>
                   <p><b>{t.description}</b></p>
                   <div className="card-actions justify-end flex mt-4">
-                    <button className='text-indigo-500' onClick={() => deleteTask(t.idtask)}>Delete</button>
-                    <button className='text-indigo-500'>In Progress</button>
-                      <button className='text-indigo-500'>Done</button>
+                      <button className='text-indigo-500' onClick={() => deleteTask(t.idtask)}>Delete</button>
+                      <button className='text-indigo-500' onClick={() => updateToInProcess(t.idtask)}>In Progress</button>
+                      <button className='text-indigo-500' onClick={() => updateToDone(t.idtask)}>Done</button>
                     </div>
                   </div>
                 </div> 
                 ))}
-              </div> : <p className='font-bold'>At the moment you dont Have Tasks!</p>}
+              </div> : <p className='font-bold'>At the moment you dont Have Pending Tasks!</p>}
 
             <div className='mt-6'>
                  {showDeleteMessage ? <p className='text-indigo-500'>{deleteMessage}</p> : null}
+                 {showInProcessMsg ? <p className='text-indigo-500'>{inProcessMsg}</p> : null}
+                 {showDoneMsg ? <p className='text-indigo-500'>{doneMsg}</p> : null}
             </div>
         </div>
       

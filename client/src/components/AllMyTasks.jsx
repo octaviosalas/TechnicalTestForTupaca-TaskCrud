@@ -30,6 +30,10 @@ const AllMyTasks = () => {
           })
   }, [])
 
+  useEffect(() => { 
+      console.log(userCtx.userId)
+  }, [])
+
 
   return (
     <div>

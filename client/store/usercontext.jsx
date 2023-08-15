@@ -21,6 +21,7 @@ const [userId, setUserId] = useState(() => {
 
 const updateUser = (id) => {                   
     setUserId(id)
+    console.log("Estoy actualizando el ID del contexto")
     sessionStorage.setItem('userId', id);     
 };
 

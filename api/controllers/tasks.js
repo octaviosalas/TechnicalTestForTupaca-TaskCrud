@@ -18,7 +18,7 @@ export const saveTask = async (req, res) => {
 
     await newTask.save();
     res.send('Task has been saved');
-    console.log(req.body);
+
   } catch (err) {
     console.log(err);
     res.send('Errors detected');
@@ -28,10 +28,11 @@ export const saveTask = async (req, res) => {
 
   export const showingTasksInDb = async (req, res) => { 
     const { userId } = req.params;
+   
     try {
       const docs = await Tasks.find({ iduser: userId });
        res.send(docs)
-       console.log(docs) 
+      
     } catch (err) {
         res.send(err)
         console.log("Hay errores para obtener las tareas", err)
@@ -41,7 +42,9 @@ export const saveTask = async (req, res) => {
 
 
 export const deleteTaskInDb =  async (req, res) => { 
-   
+  
+  console.log(req.body)
+
   try {
     await Tasks.findOneAndDelete({idtask: req.body.idtask})
     res.json({message: "The task has been deleted"})
@@ -52,19 +55,33 @@ export const deleteTaskInDb =  async (req, res) => {
 
 }
 
-///findOneAndUpdate se usa cuando queres actualizar/modificar/eliminar una sola cosa
+
 export const updateTaskInDb = async (req, res) => { 
    try {
-       await Task.findOneAndUpdate({idtask: req.body.idtask}, { 
-         done: true
+       await Tasks.findOneAndUpdate({idtask: req.body.idtask}, { 
+         done: true,
+         pending: false,
+         inProgres: false
        })
-       res.send("Tarea Actualizada como Finalizada en la Base de Datos")
+       res.json({message:"The task was marked as Done! Congratulations"})
    } catch (err) {
       res.send(err)
    }
 }
 
 
+export const updateInProcess = async (req, res) => { 
+  try {
+    await Tasks.findOneAndUpdate({idtask: req.body.idtask}, { 
+      done: false,
+      pending: false,
+      inProgres: true
+    })
+    res.json({message:"The task was marked as In Process! Lets Do It"})
+} catch (err) {
+   res.send(err)
+}
+}
 
 
 export const searchById = async (req, res) => { 
@@ -76,34 +93,52 @@ export const searchById = async (req, res) => {
   }
 }
 
+export const getTaskBySearch = async (req, res) => {
+  const { searchParam } = req.params;
+  const regex = new RegExp(searchParam, 'i');
+
+  Tasks.find({
+    $or: [
+      { title: regex },
+      { description: regex },   
+    ],
+  })
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => console.log(err));
+};
+
 
 export const editTask = async (req, res) => { 
-  try {
+ /* try {
     console.log("Holaa");
     console.log(req.body);
-    await Task.findOneAndUpdate({ idtask: req.body.idtask }, { 
+    await Tasks.findOneAndUpdate({ idtask: req.body.idtask }, { 
       title: req.body.title,
       description: req.body.description,
-      schedule: req.body.schedule,
+      date: req.body.date,
       iduser: req.body.iduser
     })
      res.status(200).send("Tarea editada correctamente!");
   } catch (error) {
      res.status(500).send(error);
-  }
+  }*/
+
+  try {
+    console.log(req.body)
+    console.log("Esta pasando algo")
+    await Tasks.findOneAndUpdate({idtask: req.body.idtask}, { 
+      title: req.body.title,
+      description: req.body.description,
+      date: req.body.date,
+      iduser: req.body.iduser
+    })
+    res.json({message:"The task was marked as In Process! Lets Do It"})
+} catch (err) {
+   res.send(err)
 }
 
-/*
-export const editTask = async (req, res) => { 
-    try {
-       await Task.findByIdAndUpdate({idtask: req.body.idtask}, { 
-        title: req.body.title,
-        description: req.body.description,
-        date: req.body.date,
-        schedule: req.body.schedule
-       })
-       res.send("Tarea editada")
-    } catch (error) {
-       res.send(error)
-    }
-} */
+
+}
+
