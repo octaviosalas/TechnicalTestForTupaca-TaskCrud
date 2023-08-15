@@ -111,19 +111,7 @@ export const getTaskBySearch = async (req, res) => {
 
 
 export const editTask = async (req, res) => { 
- /* try {
-    console.log("Holaa");
-    console.log(req.body);
-    await Tasks.findOneAndUpdate({ idtask: req.body.idtask }, { 
-      title: req.body.title,
-      description: req.body.description,
-      date: req.body.date,
-      iduser: req.body.iduser
-    })
-     res.status(200).send("Tarea editada correctamente!");
-  } catch (error) {
-     res.status(500).send(error);
-  }*/
+
 
   try {
     console.log(req.body)

@@ -21,7 +21,6 @@ const Login = () => {
       
       axios.post("http://localhost:4000/login", userData)
            .then((res) => { 
-            console.log(res.data)
             userCtx.updateUser(res.data.id)
             setTimeout(() => { 
             navigate(`/welcome/${userCtx.userId}`)
@@ -32,9 +31,6 @@ const Login = () => {
            })
    }
 
-   useEffect(() => { 
-        console.log("Modificado a: " + userCtx.userId)
-   }, [userCtx.userId])
 
 
   return (

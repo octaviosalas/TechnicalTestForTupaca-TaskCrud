@@ -35,17 +35,9 @@ const AllMyTasks = () => {
       console.log(userCtx.userId)
   }, [])
 
-  useEffect(() => {
-    function compareByDate(taskA, taskB) {
-      const dateA = new Date(taskA.date);
-      const dateB = new Date(taskB.date);
-      return dateA - dateB;
-    }
 
-    const sortedTasks = [...allTasks].sort(compareByDate);
-    setOrderByDate(sortedTasks);
-    
-  }, [orderByDate]);
+
+
 
 
   return (

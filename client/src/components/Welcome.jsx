@@ -28,9 +28,6 @@ const Welcome = () => {
         }, 1000) 
     }, [userCtx.userId])
 
-    useEffect(() => { 
-        console.log(userId)
-    }, [userCtx.userId])
 
   return (
     <div>

@@ -68,7 +68,7 @@ const StructureAllMyTasks = ({tasks}) => {
       </Table>
     </TableContainer>
 
-    {showDeleteMessage ? <p>{deleteMessage}</p> : null}
+    {showDeleteMessage ? <p className='font-bold text-2xl mt-6 text-indigo-500 ' >{deleteMessage}</p> : null}
     
        
     </div>
