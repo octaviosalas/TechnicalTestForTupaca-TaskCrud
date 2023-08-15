@@ -83,7 +83,7 @@ const PendingTasks = () => {
          
         {noTasks ? 
           <div className='grid grid-cols-1 gap-6 '>
-             <h1 className='font-bold'>Pending Tasks </h1>
+             <h1 className='font-bold text-2xl mt-48 text-indigo-500 underline'>Pending Tasks </h1>
             {userPendingTasks.map((t) => ( 
                 <div className="card card-compact w-96 bg-base-100 shadow-xl mt-6">
                 <div className="card-body">
@@ -92,9 +92,9 @@ const PendingTasks = () => {
                     </div>
                   <p><b>{t.description}</b></p>
                   <div className="card-actions justify-end flex mt-4">
-                      <button className='text-indigo-500' onClick={() => deleteTask(t.idtask)}>Delete</button>
-                      <button className='text-indigo-500' onClick={() => updateToInProcess(t.idtask)}>In Progress</button>
-                      <button className='text-indigo-500' onClick={() => updateToDone(t.idtask)}>Done</button>
+                      <button className='text-white bg-slate-800' onClick={() => deleteTask(t.idtask)}>Delete</button>
+                      <button className='text-white bg-slate-800' onClick={() => updateToInProcess(t.idtask)}>In Progress</button>
+                      <button className='text-white bg-slate-800' onClick={() => updateToDone(t.idtask)}>Done</button>
                     </div>
                   </div>
                 </div> 

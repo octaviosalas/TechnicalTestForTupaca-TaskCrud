@@ -38,17 +38,12 @@ const StructureAllMyTasks = ({tasks}) => {
     <div className='mt-[120px]'> 
         
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 750 }} size="small" aria-label="a dense table">
+      <Table sx={{ minWidth: 620 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Task Title</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Mark As Done</TableCell>
-            <TableCell align="right">In Progress</TableCell>
-            <TableCell align="right">Pending</TableCell>
-            <TableCell align="right">Edit</TableCell>
-            <TableCell align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,10 +57,7 @@ const StructureAllMyTasks = ({tasks}) => {
 
               </TableCell>
                 <TableCell align="right">{t.date}</TableCell>
-                <TableCell align="right"><input type="checkbox"  className="checkbox" /></TableCell>
-                <TableCell align="right"><input type="checkbox"  className="checkbox" /></TableCell>
-                <TableCell align="right"><input type="checkbox"  className="checkbox" /></TableCell>
-                <TableCell><DeleteIcon className='cursor-pointer' onClick={() => deleteTask(t.idtask)}/></TableCell>
+                <TableCell><DeleteIcon className='cursor-pointer ml-6' onClick={() => deleteTask(t.idtask)}/></TableCell>
                 <TableCell>
                   <ModalEditTask idUser={userCtx.userId} description={t.description} title={t.title} date={t.date} idtask={t.idtask}/>
                </TableCell>

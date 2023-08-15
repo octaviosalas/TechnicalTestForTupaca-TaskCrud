@@ -29,7 +29,8 @@ const SearchBySearch = () => {
     <NavBar/>
     {notResults ? <p className='font-bold'>No Result for your Search!</p> 
        : 
-      <div className='grid grid-cols-3 gap-6'>
+       <div className='grid grid-cols-1 gap-6 '>
+        <h1 className='font-bold text-2xl mt-6 text-indigo-500 underline'>Results of your Search</h1>
         {searchResults.map((t) => ( 
             <div className="card card-compact w-96 bg-base-100 shadow-xl mt-6">
             <div className="card-body">

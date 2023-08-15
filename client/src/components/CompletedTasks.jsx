@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import { UserContext } from '../../store/userContext'
+import CardTask from './CardTask'
 
 const CompletedTasks = () => { 
 
     const [userCompletedTasks, setUserCompletedTasks] = useState([])
-    const [noTasks, setNoTasks] = useState(true)
+    const [noTasks, setNoTasks] = useState(false)
     const userCtx = useContext(UserContext)
 
     useEffect(() => { 
@@ -20,7 +21,7 @@ const CompletedTasks = () => {
                     if(onlyCompletedTasks.length !== 0) { 
                         setUserCompletedTasks(onlyCompletedTasks)
                     } else { 
-                        setNoTasks(false)
+                        setNoTasks(true)
                     }
                     
              
@@ -31,22 +32,31 @@ const CompletedTasks = () => {
              })
     }, [])
 
-    const deleteTask = (idtask) => { 
-        axios.post("http://localhost:4000/deleteTask", {idtask: idtask})
-             .then(res => { 
-                console.log(res.data)
-                setDeleteMessage(res.data.message)
-                setShowDeleteMessage(true)
-                setTimeout(() => { 
-                   window.location.reload()
-                }, 1500)
-             })
-             .catch(err => console.log(err))
-   }
-
+  
      
 
 
+  return (
+    <div>
+        <NavBar/>
+        { noTasks ? <p className='font-bold text-2xl mt-48 text-indigo-500 underline'>You dont have completed Tasks</p> : 
+        <>
+             <div>
+             <h1 className='font-bold text-2xl mt-48 text-indigo-500 underline'>Completed Tasks</h1>
+             </div>
+             <div>
+               {userCompletedTasks.map((t) => <CardTask tasks={t}/>)}
+             </div>      
+        </>
+  }
+           
+      </div>
+  )
+}
+
+export default CompletedTasks;
+
+/*
   return (
     <div>
         <NavBar/>
@@ -79,3 +89,4 @@ const CompletedTasks = () => {
 }
 
 export default CompletedTasks;
+*/

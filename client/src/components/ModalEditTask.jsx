@@ -20,7 +20,7 @@ const style = {
   pb: 3,
 };
 const ModalEditTask = ({idUser, description, title, date, idtask }) => {
-   console.log(idtask)
+   
 
   
     const [open, setOpen] = React.useState(false);
